@@ -1,0 +1,63 @@
+.startScreen {
+  background-image: url('./../../../src/media/redWall.webp');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.startBox {
+  width: 100vw;
+  height: auto;
+  position: relative;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+
+.startboxImage {
+  width: 50%;
+  height: auto;
+}
+
+.startBoxAbsolut {
+  position: absolute;
+  bottom: 8vh;
+  width: 100%;
+}
+
+.startLabelRelativ {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 0.5s ease-in-out;
+  margin-bottom: 0.5rem;
+
+  &:hover {
+    filter: brightness(1.2);
+  }
+}
+
+.startLabel {
+  position: absolute;
+  cursor: pointer;
+  width: clamp(130px, 25vw, 300px);
+}
+
+.startGamePara {
+  position: absolute;
+  padding-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  text-shadow: 3px 2px 3px rgba(0, 0, 0, 0.5019607843);
+  font-size: clamp(1.5rem, 1vw + 1rem, 2.25rem);
+}

@@ -1,0 +1,41 @@
+.participant {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  // justify-content: center;
+  position: absolute;
+  right: 0;
+  background-color: rgb(183 179 179 / 35%);
+  box-shadow: 4px 4px 7px 1px #322525;
+  border: rgba(57, 54, 54, 0.899) solid 0.1px;
+  border-radius: 0.5rem;
+  margin: 2.5rem;
+  width: 200px;
+}
+
+.player {
+  display: flex;
+  // flex-direction: column;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.6rem;
+  align-items: center;
+  justify-content: unset;
+
+  img {
+    object-fit: cover;
+    width: 50px;
+    height: 50px;
+  }
+
+  span {
+    color: whitesmoke;
+    font-size: 16px;
+    padding: 0.2rem;
+  }
+}
+
+.active {
+  border: 2px solid rgba(158, 52, 13, 0.934);
+  background-color: rgba(57, 36, 21, 0.5);
+}

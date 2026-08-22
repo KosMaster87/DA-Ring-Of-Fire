@@ -1,0 +1,90 @@
+import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { PlayerComponent } from '../player/player.component';
+import { Game } from '../../models/game';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { GameInfoComponent } from '../game-info/game-info.component';
+import { MatCardModule } from '@angular/material/card';
+
+@Component({
+  selector: 'app-game',
+  standalone: true,
+  imports: [
+    CommonModule,
+    PlayerComponent,
+    MatButtonModule,
+    MatIconModule,
+    FormsModule,
+    MatDialogModule,
+    GameInfoComponent,
+    MatCardModule,
+  ],
+  // changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './game.component.html',
+  styleUrls: ['./game.component.scss'],
+})
+export class GameComponent {
+  pickCardAnimation = false;
+  currentCard: string | undefined;
+  playedCards: string[] | undefined;
+  game: Game | undefined = inject(Game);
+
+  constructor(public dialog: MatDialog) {
+    console.log(this.game!.players);
+  }
+
+  selectCard(card: string) {
+    this.currentCard = card;
+  }
+
+  newGame() {
+    this.game = new Game();
+    console.log(this.game);
+  }
+
+  calcPositionDieErstenVier(i: number) {
+    return -i * 12 + 48 + 'px';
+  }
+
+  /**
+   * "Definite Assignment Assertion" bezeichnet. Es weist den Compiler an, dass
+   * die Variable oder das Property definitiv einen Wert haben wird, auch wenn es
+   * zur Compile-Zeit nicht offensichtlich ist.
+   */
+  takeCard() {
+    // if (!this.pickCardAnimation && this.game!.players.length > 0) {
+    if (!this.pickCardAnimation) {
+      this.currentCard = this.game!.stack.pop();
+      this.pickCardAnimation = true;
+
+      console.log(this.game);
+      console.log('New card: ' + this.currentCard);
+
+      // this.currentPlayer ++;
+      // this.currentPlayer = this.currentPlayer % this.players.length;
+
+      setTimeout(() => {
+        if (this.currentCard) {
+          this.game!.playedCards!.push(this.currentCard);
+        }
+        this.pickCardAnimation = false;
+      }, 1200);
+    }
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogAddPlayerComponent);
+
+    dialogRef.afterClosed().subscribe((name: string) => {
+      console.log('Soll der Name sein! ' + name);
+
+      if (name && name.length > 0) {
+        this.game!.players.push(name);
+      }
+    });
+  }
+}

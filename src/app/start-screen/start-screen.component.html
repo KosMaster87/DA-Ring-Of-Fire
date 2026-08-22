@@ -1,0 +1,25 @@
+<div class="startScreen">
+  <app-header></app-header>
+
+  <div class="startBox" id="startBox">
+    <img class="startboxImage" id="startboxImage" src="assets/img/startBox.webp" alt="" />
+
+    <div
+      (click)="newGame()"
+      (keydown.enter)="newGame()"
+      (keydown.space)="newGame()"
+      role="button"
+      tabindex="0"
+      class="startBoxAbsolut"
+      id="startBoxAbsolut"
+    >
+      <div class="startLabelRelativ" id="startLabelRelativ">
+        <img class="startLabel" id="startLabel" src="assets/img/labelClean.webp" alt="" />
+
+        <p class="startGamePara" id="startGamePara">Let`s drink</p>
+      </div>
+    </div>
+  </div>
+
+  <app-footer></app-footer>
+</div>

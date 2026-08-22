@@ -1,0 +1,79 @@
+<!-- Spieler Komponente -->
+<app-player></app-player>
+
+<section class="field" id="field">
+  <div class="cardStack" id="cardStack">
+    @for (Card of [0, 1, 2, 3]; track Card; let i = $index) {
+      <!-- Der Stapel -->
+      <img
+        [ngStyle]="{
+          transform: 'translateX(' + calcPositionDieErstenVier(i) + ')',
+        }"
+        class="cardStack_img"
+        id="cardStack_img"
+        src="assets/img/cards/card_cover.webp"
+        alt="Card cover {{ i }}"
+      />
+    }
+
+    <!-- Die Karte auf dem Stapel. -->
+    <img
+      (click)="takeCard()"
+      (keydown.enter)="takeCard()"
+      (keydown.space)="takeCard()"
+      role="button"
+      tabindex="0"
+      class="cardStack_img topCard"
+      id="cardStack_img"
+      src="assets/img/cards/card_cover.webp"
+      alt="Top card, click to draw"
+    />
+
+    <!-- Die Gezogene Karte.
+    <img
+      *ngIf="pickCardAnimation"
+      (click)="takeCard()"
+      class="cardStack_img pickCardAnimation pickCard"
+      id="cardStack_img"
+      src="assets/img/cards/{{ currentCard }}.webp"
+    /> -->
+    <!-- Die Gezogene Karte. -->
+    <img
+      *ngIf="pickCardAnimation"
+      (click)="takeCard()"
+      (keydown.enter)="takeCard()"
+      (keydown.space)="takeCard()"
+      role="button"
+      tabindex="0"
+      class="cardStack_img pickCard"
+      id="cardStack_img"
+      src="assets/img/cards/{{ currentCard }}.webp"
+      alt="Drawn card {{ currentCard }}"
+    />
+
+    <div class="playedCardStack" id="playedCardStack">
+      @for (playedCard of game?.playedCards; track playedCard; let card = $index) {
+        <!-- Die Abgelegte Karte. -->
+        <img
+          class="playedCard"
+          id="playedCard"
+          src="assets/img/cards/{{ playedCard }}.webp"
+          alt=""
+        />
+      }
+    </div>
+  </div>
+
+  <!-- Info Komponente -->
+  <app-game-info [card]="currentCard"></app-game-info>
+
+  <button
+    class="addPlayerBtn"
+    id="addPlayerBtn"
+    (click)="openDialog()"
+    mat-fab
+    aria-label="Example icon button with a delete icon"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+</section>
